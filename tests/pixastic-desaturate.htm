@@ -1,0 +1,61 @@
+<script type="text/javascript" src="testrunner.js"></script>
+
+<script type="text/javascript">
+// https://bugzilla.mozilla.org/show_bug.cgi?id=497458
+
+const useAverage = true;
+function filterIt(params) {
+    var data = prepareData(params);
+    var rect = params.options.rect;
+    var w = rect.width;
+    var h = rect.height;
+
+    var p = w*h;
+    var pix = p*4, pix1, pix2;
+
+    if (useAverage) {
+        while (p--)
+            data[pix-=4] = data[pix1=pix+1] = data[pix2=pix+2] = (data[pix]+data[pix1]+data[pix2])/3
+    } else {
+        while (p--)
+            data[pix-=4] = data[pix1=pix+1] = data[pix2=pix+2] = (data[pix]*0.3 + data[pix1]*0.59 + data[pix2]*0.11);
+    }
+}
+
+function prepareData(params, getCopy) {
+    var ctx = params.canvas.getContext("2d");
+    var rect = params.options.rect;
+    var dataDesc = ctx.getImageData(rect.left, rect.top, rect.width, rect.height);
+    var data = dataDesc.data;
+    if (!getCopy) params.canvasData = dataDesc;
+    return data;
+}
+
+function runTest() {
+    var i = document.getElementById("i");
+    var c = document.createElement("canvas");
+    c.width = i.naturalWidth;
+    c.height = i.naturalHeight;
+    //var start = new Date();
+    //    connectShark();
+    //    startShark();
+    var ctx = c.getContext("2d");
+    ctx.drawImage(i, 0, 0);
+    var params = {
+	canvas: c,
+	options: {
+            rect: { left: 0, top: 0, width: i.naturalWidth, height: i.naturalHeight }
+	}
+    };
+    filterIt(params);
+    ctx.putImageData(params.canvasData, 0, 0);
+    //    stopShark();
+    //    disconnectShark();
+    //var end = new Date();
+    //alert(end - start);
+    document.body.appendChild(c);
+}
+</script>
+
+<img src="pixastic-desaturate-img.jpg" style="display: none" id="i" onload="loadHandler()">
+

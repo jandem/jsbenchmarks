@@ -1,0 +1,14 @@
+<script type="text/javascript" src="testrunner.js"></script>
+
+<script type="text/javascript">
+// https://bugzilla.mozilla.org/show_bug.cgi?id=609296
+
+function runTest() {
+    var s;
+    for(var i=0; i<2000000; i++) {
+	s = (i % 8).toString();
+    }
+    return s;
+}
+window.onload = loadHandler;
+</script>
