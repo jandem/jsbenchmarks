@@ -1,0 +1,19 @@
+<script type="text/javascript" src="testrunner.js"></script>
+
+<script type="text/javascript">
+// https://bugzilla.mozilla.org/show_bug.cgi?id=894881
+
+var arr = [new Int32Array(128), new Int32Array(16)];
+
+function runTest() {
+    var res = [];
+    for (var i=0; i<10000000; i++) {
+	res[0] = arr[i % 2].length;
+	res[1] = arr[i % 2].byteLength;
+        res[2] = arr[i % 2].buffer;
+	res[3] = arr[i % 2].set;
+    }
+    return res;
+}
+window.onload = loadHandler;
+</script>
