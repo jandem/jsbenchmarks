@@ -7,4 +7,5 @@ var testList = [
     {filename:"pk-sha1.htm", name:"SHA1"},
     {filename:"model2d.htm", name:"Model2D"},
     {filename:"kudoku.htm", name:"Kudoku Sudoku Solver"},
+    {filename:"rayjs/index.htm", name:"Oliver's JS Raytracer"},
 ];
