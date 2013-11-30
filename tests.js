@@ -5,4 +5,5 @@ var testList = [
     {filename:"bigint/index.htm", name:"jsbn BigInteger"},
     {filename:"distance-transform.htm", name:"Distance Transform"},
     {filename:"pk-sha1.htm", name:"SHA1"},
+    {filename:"model2d.htm", name:"Model2D"},
 ];
