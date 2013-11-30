@@ -6,4 +6,5 @@ var testList = [
     {filename:"distance-transform.htm", name:"Distance Transform"},
     {filename:"pk-sha1.htm", name:"SHA1"},
     {filename:"model2d.htm", name:"Model2D"},
+    {filename:"kudoku.htm", name:"Kudoku Sudoku Solver"},
 ];
