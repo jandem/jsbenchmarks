@@ -1,0 +1,66 @@
+<html>
+<head>
+<script src="jpx.js"></script>
+<script src="jpx-data.js"></script>
+</head>
+<body>
+<div>Parsing time: <span id="t">--</span> msec</div>
+<canvas id="c"></canvas>
+<script type="text/javascript" src="../testrunner.js"></script>
+<script type="text/javascript">
+function runTest() {
+    var input = new Uint8Array(jpxData.length);
+    for (var i = 0; i < jpxData.length; i++)
+      input[i] = jpxData.charCodeAt(i);
+
+    var jpxImage = new JpxImage();
+    var startTime = Date.now();
+    jpxImage.parse(input);
+    var endTime = Date.now();
+    reportTestResult(endTime - startTime);
+    document.getElementById('t').textContent = (endTime - startTime);
+
+    // visialize stuff (not relevant for this test)
+    var width = jpxImage.width;
+    var height = jpxImage.height;
+    var componentsCount = jpxImage.componentsCount;
+    if (componentsCount !== 3) throw "unsupported";
+
+    var c = document.getElementById('c');
+    c.width = width; c.height = height;
+    var ctx = c.getContext('2d');
+    var canvasData = ctx.createImageData(width, height);
+    var data = canvasData.data;
+
+    for (var k = 0, kk = jpxImage.tiles.length; k < kk; k++) {
+      var tileCompoments = jpxImage.tiles[k];
+      var tileWidth = tileCompoments[0].width;
+      var tileHeight = tileCompoments[0].height;
+      var tileLeft = tileCompoments[0].left;
+      var tileTop = tileCompoments[0].top;
+
+      var dataPosition, sourcePosition, data0, data1, data2, rowFeed;
+      data0 = tileCompoments[0].items;
+      data1 = tileCompoments[1].items;
+      data2 = tileCompoments[2].items;
+
+      dataPosition = (width * tileTop + tileLeft) * 4;
+      rowFeed = (width - tileWidth) * 4;
+      sourcePosition = 0;
+      for (var j = 0; j < tileHeight; j++) {
+        for (var i = 0; i < tileWidth; i++) {
+          data[dataPosition++] = data0[sourcePosition];
+          data[dataPosition++] = data1[sourcePosition];
+          data[dataPosition++] = data2[sourcePosition];
+          data[dataPosition++] = 255;
+          sourcePosition++;
+        }
+        dataPosition += rowFeed;
+      }
+    }
+
+    ctx.putImageData(canvasData, 0, 0);
+}
+window.onload = loadHandler;
+</script>
+</body></html>
