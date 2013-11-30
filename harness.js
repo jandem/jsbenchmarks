@@ -25,7 +25,7 @@ function finishTest(res) {
     }
 
     currentTest++;
-    setTimeout(runSingleTest, 5);
+    runSingleTest();
 }
 
 function init() {

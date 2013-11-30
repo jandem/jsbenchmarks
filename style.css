@@ -8,6 +8,9 @@ a.testname {
     color: navy;
     text-decoration: none;
 }
+a.testname:hover {
+    text-decoration: underline;
+}
 #results {
     float: left;
     width: 300px;
