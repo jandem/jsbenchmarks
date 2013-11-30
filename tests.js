@@ -13,4 +13,5 @@ var testList = [
     {filename:"jpx2/index.htm", name:"jpeg2000 decoder"},
     {filename:"JSIL-ElementProxies/index.htm", name:"JSIL ElementProxies"},
     {filename:"JSIL-memcpy.htm", name:"JSIL memcpy"},
+    {filename:"facedetect/index.htm", name:"Face detection"},
 ];
