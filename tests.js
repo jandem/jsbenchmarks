@@ -10,4 +10,5 @@ var testList = [
     {filename:"rayjs/index.htm", name:"Oliver's JS Raytracer"},
     {filename:"md5.htm", name:"md5"},
     {filename:"jpx2/index.htm", name:"jpeg2000 decoder"},
+    {filename:"JSIL-ElementProxies/index.htm", name:"JSIL ElementProxies"},
 ];
