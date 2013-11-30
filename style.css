@@ -8,3 +8,12 @@ a.testname {
     color: navy;
     text-decoration: none;
 }
+#results {
+    float: left;
+    width: 300px;
+}
+#testframe {
+    width: 1000px;
+    height: 500px;
+    float: left;
+}
